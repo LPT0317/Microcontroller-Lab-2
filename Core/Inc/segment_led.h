@@ -9,9 +9,6 @@
 #define INC_SEGMENT_LED_H_
 
 #include "main.h"
-#include "string.h"
-
-extern string led_Pin[7];
 
 void clear7SEG();
 void display7SEG(int num);

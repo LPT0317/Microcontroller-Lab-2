@@ -8,11 +8,9 @@
 #ifndef INC_TIMER_H_
 #define INC_TIMER_H_
 
-extern int SEG1_flag;
-extern int SEG2_flag;
+extern int EN_flag;
 
-void setTimerSEG1(int duration);
-void setTimerSEG2(int duration);
+void setTimer(int duration);
 void timerRun();
 
 #endif /* INC_TIMER_H_ */
