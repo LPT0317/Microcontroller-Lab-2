@@ -7,19 +7,18 @@
 
 #include "timer.h"
 
+int counter = 0;
 int EN_flag = 0;
 
-int timer_counter = 0;
-
 void setTimer(int duration){
-	timer_counter = duration;
+	counter = duration;
 	EN_flag = 0;
 }
 void timerRun(){
-	if(timer_counter == 0){
+	if(counter == 0){
 		EN_flag = 1;
 	}
-	if(timer_counter > 0){
-		timer_counter--;
+	if(counter > 0){
+		counter--;
 	}
 }

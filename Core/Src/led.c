@@ -1,11 +1,13 @@
 /*
- * segment_led.c
+ * led.c
  *
  *  Created on: Sep 30, 2022
  *      Author: lephu
  */
 
-#include "segment_led.h"
+#include "led.h"
+
+int EN_state = 0;
 
 void clear7SEG(){
 	HAL_GPIO_WritePin(GPIOB, SEG0_Pin | SEG1_Pin | SEG2_Pin |
@@ -53,5 +55,23 @@ void display7SEG(int num){
 										 SEG3_Pin | SEG5_Pin | SEG6_Pin, 0);
 				break;
 		}
+	}
+}
+void switchState(){
+	if(EN_state == 0){
+		HAL_GPIO_WritePin(GPIOA, LED_RED_Pin, 1);
+		HAL_GPIO_WritePin(GPIOA, EN0_Pin, 1);
+		HAL_GPIO_WritePin(GPIOA, EN1_Pin, 0);
+		clear7SEG();
+		display7SEG(2);
+		EN_state = 1;
+	}
+	else{
+		HAL_GPIO_WritePin(GPIOA, LED_RED_Pin, 0);
+		HAL_GPIO_WritePin(GPIOA, EN0_Pin, 0);
+		HAL_GPIO_WritePin(GPIOA, EN1_Pin, 1);
+		clear7SEG();
+		display7SEG(1);
+		EN_state = 0;
 	}
 }
