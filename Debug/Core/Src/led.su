@@ -1,8 +1,9 @@
-led.c:15:6:clear7SEG	8	static
-led.c:19:6:display7SEG	16	static
-led.c:63:6:initState	4	static
-led.c:66:6:openEN	16	static
-led.c:80:6:clearEN	8	static
-led.c:86:6:displayClock	16	static
-led.c:116:6:blinkLED	8	static
-led.c:120:6:update7SEG	16	static
+led.c:16:6:clear7SEG	8	static
+led.c:20:6:display7SEG	16	static
+led.c:64:6:initState	4	static
+led.c:67:6:openEN	16	static
+led.c:81:6:clearEN	8	static
+led.c:87:6:displayClock	16	static
+led.c:117:6:blinkLED	8	static
+led.c:121:6:update7SEG	16	static
+led.c:155:6:updateClockBuffer	4	static
