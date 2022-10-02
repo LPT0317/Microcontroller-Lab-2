@@ -8,6 +8,9 @@
 #include "led.h"
 
 int EN_state = 0;
+const int MAX_LED = 4;
+int index_led = 0;
+int led_buffer [4] = {1 , 2 , 3 , 4};
 
 void clear7SEG(){
 	HAL_GPIO_WritePin(GPIOB, SEG0_Pin | SEG1_Pin | SEG2_Pin |
@@ -113,4 +116,38 @@ void displayClock(int hour, int minute){
 void blinkLED(){
 	HAL_GPIO_TogglePin(GPIOA, LED_RED_Pin);
 	HAL_GPIO_TogglePin(GPIOA, DOT_Pin);
+}
+void update7SEG(int index){
+	switch(index){
+		case 0:
+			// Display the first 7 SEG with led_buffer [0]
+			clear7SEG();
+			clearEN();
+			openEN(index);
+			display7SEG(led_buffer[index]);
+			break ;
+		case 1:
+			// Display the second 7 SEG with led_buffer [1]
+			clear7SEG();
+			clearEN();
+			openEN(index);
+			display7SEG(led_buffer[index]);
+			break ;
+		case 2:
+			// Display the third 7 SEG with led_buffer [2]
+			clear7SEG();
+			clearEN();
+			openEN(index);
+			display7SEG(led_buffer[index]);
+			break ;
+		case 3:
+			// Display the forth 7 SEG with led_buffer [3]
+			clear7SEG();
+			clearEN();
+			openEN(index);
+			display7SEG(led_buffer[index]);
+			break ;
+		default :
+			break ;
+	}
 }

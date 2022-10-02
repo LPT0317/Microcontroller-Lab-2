@@ -92,10 +92,12 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
   initState();
-  setTimer(500);
+  setTimer_EN(500);
+  setTimer_LED(1000);
   clear7SEG();
   int hour = 12;
   int minute = 30;
+  int index = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -103,10 +105,16 @@ int main(void)
   while (1)
   {
 	  if(EN_flag == 1){
-		  displayClock(hour, minute);
-		  blinkLED();
-		  setTimer(500);
+		  //displayClock(hour, minute);
+		  update7SEG(index);
+		  index++;
+		  if(index > 3) index = 0;
+		  setTimer_EN(500);
   	  }
+	  if(LED_flag == 1){
+		  blinkLED();
+		  setTimer_LED(1000);
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
