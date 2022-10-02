@@ -92,7 +92,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
   initState();
-  setTimer_EN(500);
+  setTimer_EN(250);
   setTimer_LED(1000);
   clear7SEG();
   int hour = 12;
@@ -109,7 +109,7 @@ int main(void)
 		  update7SEG(index);
 		  index++;
 		  if(index > 3) index = 0;
-		  setTimer_EN(500);
+		  setTimer_EN(250);
   	  }
 	  if(LED_flag == 1){
 		  blinkLED();
