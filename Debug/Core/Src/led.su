@@ -1,3 +1,7 @@
 led.c:12:6:clear7SEG	8	static
 led.c:16:6:display7SEG	16	static
-led.c:60:6:switchState	8	static
+led.c:60:6:initState	4	static
+led.c:63:6:openEN	16	static
+led.c:77:6:clearEN	8	static
+led.c:83:6:displayClock	16	static
+led.c:113:6:blinkLED	8	static

@@ -11,7 +11,7 @@ int counter = 0;
 int EN_flag = 0;
 
 void setTimer(int duration){
-	counter = duration;
+	counter = duration / 10;
 	EN_flag = 0;
 }
 void timerRun(){

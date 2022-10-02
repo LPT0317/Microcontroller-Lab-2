@@ -10,10 +10,11 @@
 
 #include "main.h"
 
-extern int EN_state;
-
 void clear7SEG();
 void display7SEG(int num);
-void switchState();
-
+void initState();
+void clearEN();
+void openEN(int state);
+void displayClock(int hour, int minute);
+void blinkLED();
 #endif /* INC_LED_H_ */

@@ -57,21 +57,60 @@ void display7SEG(int num){
 		}
 	}
 }
-void switchState(){
-	if(EN_state == 0){
-		HAL_GPIO_WritePin(GPIOA, LED_RED_Pin, 1);
-		HAL_GPIO_WritePin(GPIOA, EN0_Pin, 1);
+void initState(){
+	EN_state = 0;
+}
+void openEN(int state){
+	if(state == 0){
+		HAL_GPIO_WritePin(GPIOA, EN0_Pin, 0);
+	}
+	if(state == 1){
 		HAL_GPIO_WritePin(GPIOA, EN1_Pin, 0);
+	}
+	if(state == 2){
+		HAL_GPIO_WritePin(GPIOA, EN2_Pin, 0);
+	}
+	if(state == 3){
+		HAL_GPIO_WritePin(GPIOA, EN3_Pin, 0);
+	}
+}
+void clearEN(){
+	HAL_GPIO_WritePin(GPIOA, EN0_Pin, 1);
+	HAL_GPIO_WritePin(GPIOA, EN1_Pin, 1);
+	HAL_GPIO_WritePin(GPIOA, EN2_Pin, 1);
+	HAL_GPIO_WritePin(GPIOA, EN3_Pin, 1);
+}
+void displayClock(int hour, int minute){
+	if(EN_state == 0){
+		clearEN();
 		clear7SEG();
-		display7SEG(2);
-		EN_state = 1;
+		openEN(EN_state);
+		display7SEG(hour / 10);
+		EN_state++;
+	}
+	else if(EN_state == 1){
+		clearEN();
+		clear7SEG();
+		openEN(EN_state);
+		display7SEG(hour % 10);
+		EN_state++;
+	}
+	else if(EN_state == 2){
+		clearEN();
+		clear7SEG();
+		openEN(EN_state);
+		display7SEG(minute / 10);
+		EN_state++;
 	}
 	else{
-		HAL_GPIO_WritePin(GPIOA, LED_RED_Pin, 0);
-		HAL_GPIO_WritePin(GPIOA, EN0_Pin, 0);
-		HAL_GPIO_WritePin(GPIOA, EN1_Pin, 1);
+		clearEN();
 		clear7SEG();
-		display7SEG(1);
+		openEN(EN_state);
+		display7SEG(minute % 10);
 		EN_state = 0;
 	}
+}
+void blinkLED(){
+	HAL_GPIO_TogglePin(GPIOA, LED_RED_Pin);
+	HAL_GPIO_TogglePin(GPIOA, DOT_Pin);
 }
