@@ -109,7 +109,11 @@ int main(void)
 	  openENM(index);
 	  updateLEDMatrix(index);
 	  index++;
-	  if(index > 7) index = 0;
+	  if(index > 7)
+	  {
+	    index = 0;
+	    shiftLeft();
+	  }
     }
     /* USER CODE END WHILE */
 

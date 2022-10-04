@@ -26,4 +26,5 @@ void updateClockBuffer();
 void getBuffer(uint8_t buffer);
 void openENM(int index);
 void clearENM();
+void shiftLeft();
 #endif /* INC_LED_H_ */

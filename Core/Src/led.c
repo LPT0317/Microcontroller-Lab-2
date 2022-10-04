@@ -241,3 +241,14 @@ void blinkLED(){
       break;
     }
   }
+  /* Function to shift left buffer */
+  void shiftLeft()
+  {
+	uint8_t temp = matrix_buffer[0];
+	for(int i = 0; i < 8; i++)
+	{
+	  if(i == 7) matrix_buffer[i] = temp;
+	  else matrix_buffer[i] = matrix_buffer[i + 1];
+	}
+  }
+/* CODE END */

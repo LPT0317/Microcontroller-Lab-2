@@ -10,3 +10,4 @@ led.c:150:8:getBuffer	16	static
 led.c:170:8:openENM	16	static
 led.c:204:8:clearENM	8	static
 led.c:212:8:updateLEDMatrix	16	static
+led.c:245:8:shiftLeft	16	static
