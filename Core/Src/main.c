@@ -97,12 +97,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	if(EN_flag == 1)
-	{
-	  HAL_GPIO_WritePin(GPIOA, ENM0_Pin, 0);
-	  HAL_GPIO_WritePin(GPIOA, ROW0_Pin, matrix_buffer[7]);
-	  matrix_buffer[7] = matrix_buffer[7] << 1;
-	}
+	  HAL_GPIO_WritePin(GPIOA, ENM0_Pin, 1);
+	  HAL_GPIO_WritePin(GPIOB, ROW0_Pin, 1);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
