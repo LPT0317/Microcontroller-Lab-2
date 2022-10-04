@@ -7,12 +7,7 @@
 
 #include "led.h"
 
-int EN_state = 0;
-const int MAX_LED = 4;
-int index_led = 0;
-int led_buffer [4] = {1 , 2 , 3 , 4};
-int hour = 15, minute = 8, second = 50;
-
+/*Code for 7 SEGMENT LED */
 void clear7SEG(){
 	HAL_GPIO_WritePin(GPIOB, SEG0_Pin | SEG1_Pin | SEG2_Pin |
 			SEG3_Pin | SEG4_Pin | SEG5_Pin | SEG6_Pin, 1);
@@ -61,6 +56,16 @@ void display7SEG(int num){
 		}
 	}
 }
+/* END CODE */
+
+/* Code for digital clock */
+  /* Init variable */
+int EN_state = 0;
+const int MAX_LED = 4;
+int index_led = 0;
+int led_buffer [4] = {1 , 2 , 3 , 4};
+int hour = 15, minute = 8, second = 50;
+  /* Function for EN GPIO */
 void initState(){
 	EN_state = 0;
 }
@@ -84,40 +89,7 @@ void clearEN(){
 	HAL_GPIO_WritePin(GPIOA, EN2_Pin, 1);
 	HAL_GPIO_WritePin(GPIOA, EN3_Pin, 1);
 }
-void displayClock(int hour, int minute){
-	if(EN_state == 0){
-		clearEN();
-		clear7SEG();
-		openEN(EN_state);
-		display7SEG(hour / 10);
-		EN_state++;
-	}
-	else if(EN_state == 1){
-		clearEN();
-		clear7SEG();
-		openEN(EN_state);
-		display7SEG(hour % 10);
-		EN_state++;
-	}
-	else if(EN_state == 2){
-		clearEN();
-		clear7SEG();
-		openEN(EN_state);
-		display7SEG(minute / 10);
-		EN_state++;
-	}
-	else{
-		clearEN();
-		clear7SEG();
-		openEN(EN_state);
-		display7SEG(minute % 10);
-		EN_state = 0;
-	}
-}
-void blinkLED(){
-	HAL_GPIO_TogglePin(GPIOA, LED_RED_Pin);
-	HAL_GPIO_TogglePin(GPIOA, DOT_Pin);
-}
+  /* Function for dislay 7 SEG LED using buffer */
 void update7SEG(int index){
 	switch(index){
 		case 0:
@@ -152,9 +124,50 @@ void update7SEG(int index){
 			break ;
 	}
 }
+  /* Function for update buffer */
 void updateClockBuffer(){
 	led_buffer[0] = hour / 10;
 	led_buffer[1] = hour % 10;
 	led_buffer[2] = minute / 10;
 	led_buffer[3] = minute % 10;
 }
+/* END CODE */
+
+/* Code for blink LED */
+void blinkLED(){
+	HAL_GPIO_TogglePin(GPIOA, LED_RED_Pin);
+	HAL_GPIO_TogglePin(GPIOA, DOT_Pin);
+}
+/* END CODE */
+
+/* Code LED Matrix */
+  /* Init variable */
+  const int MAX_LED_MATRIX = 8;
+  int index_led_matrix = 0;
+  uint8_t matrix_buffer[8] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
+
+  /* Function update LED Matrix */
+  void updateLEDMatrix(int index)
+  {
+    switch(index)
+    {
+    case 0:
+      break;
+    case 1:
+      break;
+    case 2:
+      break;
+    case 3:
+      break;
+    case 4:
+      break;
+    case 5:
+      break;
+    case 6:
+      break;
+    case 7:
+      break;
+    default:
+      break;
+    }
+  }

@@ -91,41 +91,18 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
-  initState();
-  int EN_timer = 250;
-  setTimer_EN(EN_timer);
-  setTimer_LED(1000);
-  clear7SEG();
-  int index = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(EN_flag == 1){
-		  second++;
-		  if(second >= 60){
-			  second = 0;
-			  minute++;
-		  }
-		  if(minute >= 60){
-			  minute = 0;
-			  hour++;
-		  }
-		  if(hour >= 24){
-			  hour = 0;
-		  }
-		  updateClockBuffer();
-		  update7SEG(index);
-		  index++;
-		  if(index > 3) index = 0;
-		  setTimer_EN(EN_timer);
-  	  }
-	  if(LED_flag == 1){
-		  blinkLED();
-		  setTimer_LED(1000);
-	  }
+	if(EN_flag == 1)
+	{
+	  HAL_GPIO_WritePin(GPIOA, ENM0_Pin, 0);
+	  HAL_GPIO_WritePin(GPIOA, ROW0_Pin, matrix_buffer[7]);
+	  matrix_buffer[7] = matrix_buffer[7] << 1;
+	}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

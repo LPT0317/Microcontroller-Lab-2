@@ -13,6 +13,7 @@
 extern int hour;
 extern int minute;
 extern int second;
+extern uint8_t matrix_buffer[8];
 
 void clear7SEG();
 void display7SEG(int num);
