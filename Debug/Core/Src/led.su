@@ -6,4 +6,7 @@ led.c:86:6:clearEN	8	static
 led.c:93:6:update7SEG	16	static
 led.c:128:6:updateClockBuffer	4	static
 led.c:137:6:blinkLED	8	static
-led.c:150:8:updateLEDMatrix	16	static
+led.c:150:8:getBuffer	16	static
+led.c:170:8:openENM	16	static
+led.c:204:8:clearENM	8	static
+led.c:212:8:updateLEDMatrix	16	static

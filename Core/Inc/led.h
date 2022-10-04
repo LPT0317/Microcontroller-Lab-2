@@ -23,4 +23,7 @@ void openEN(int state);
 void displayClock(int hour, int minute);
 void blinkLED();
 void updateClockBuffer();
+void getBuffer(uint8_t buffer);
+void openENM(int index);
+void clearENM();
 #endif /* INC_LED_H_ */

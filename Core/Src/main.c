@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "timer.h"
 #include "led.h"
+#include "hardware_control.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -91,14 +92,25 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
+  initGPIO();
+  int index = 0;
+  int counter = 5;
+  setTimer_EN(counter);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_GPIO_WritePin(GPIOA, ENM0_Pin, 1);
-	  HAL_GPIO_WritePin(GPIOB, ROW0_Pin, 1);
+    if(EN_flag == 1)
+    {
+	  setTimer_EN(counter);
+	  clearENM();
+	  openENM(index);
+	  updateLEDMatrix(index);
+	  index++;
+	  if(index > 7) index = 0;
+    }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -162,7 +174,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 7999;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 9;
+  htim2.Init.Period = 1;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
