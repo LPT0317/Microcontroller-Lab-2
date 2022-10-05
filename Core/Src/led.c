@@ -62,7 +62,7 @@ void display7SEG(int num){
 /* Blink Led */
 void blinkLED()
 {
-  HAL_GPIO_TogglePin(GPIOA, LED_RED_Pin);
+  HAL_GPIO_TogglePin(GPIOA, LED_RED_Pin | DOT_Pin);
 }
 
 /* EN GPIO control */
@@ -82,8 +82,20 @@ void changeEN()
 	  display7SEG(2);
 	  break;
 	case 2:
+	  EN_state = 3;
+	  HAL_GPIO_TogglePin(GPIOA, EN1_Pin | EN2_Pin);
+	  clear7SEG();
+	  display7SEG(3);
+	  break;
+	case 3:
+	  EN_state = 4;
+	  HAL_GPIO_TogglePin(GPIOA, EN2_Pin | EN3_Pin);
+	  clear7SEG();
+	  display7SEG(0);
+	  break;
+	case 4:
 	  EN_state = 1;
-	  HAL_GPIO_TogglePin(GPIOA, EN0_Pin | EN1_Pin);
+	  HAL_GPIO_TogglePin(GPIOA, EN3_Pin | EN0_Pin);
 	  clear7SEG();
 	  display7SEG(1);
 	  break;
