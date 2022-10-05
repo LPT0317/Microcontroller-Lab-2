@@ -14,6 +14,7 @@ extern int EN_state;
 
 void clear7SEG();
 void display7SEG(int num);
-void switchState();
+void blinkLED();
+void changeEN();
 
 #endif /* INC_LED_H_ */

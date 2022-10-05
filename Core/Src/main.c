@@ -22,8 +22,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "timer.h"
 #include "led.h"
+#include "hardware_control.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -91,18 +91,13 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
-  int EN_state = 0;
-  setTimer(50);
+  initGPIO();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(EN_flag == 1){
-		  setTimer(50);
-		  switchState();
-	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -229,8 +224,27 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+int counter = 50;
+int led_counter = 100;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-	timerRun();
+  if(counter > 0)
+  {
+    counter--;
+    if(counter <= 0)
+    {
+    	changeEN();
+    	counter = 50;
+    }
+  }
+  if(led_counter > 0)
+  {
+    led_counter--;
+    if(led_counter <= 0)
+    {
+      led_counter = 100;
+      blinkLED();
+    }
+  }
 }
 /* USER CODE END 4 */
 
