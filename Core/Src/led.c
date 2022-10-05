@@ -14,6 +14,9 @@ const int MAX_LED = 4;
 int index_led = 0;
 int led_buffer[4] = {1 , 2 , 3 , 4};
 
+/* clock variable */
+int hour = 15, minute = 59, second = 55;
+
 /* 7SEGMENT Fuction */
 void clear7SEG(){
 	HAL_GPIO_WritePin(GPIOB, SEG0_Pin | SEG1_Pin | SEG2_Pin |
@@ -130,4 +133,13 @@ void update7SEG(int index)
 	default:
 	  break;
   }
+}
+
+/* update buffer */
+void updateClockBuffer()
+{
+	led_buffer[0] = hour / 10;
+	led_buffer[1] = hour % 10;
+	led_buffer[2] = minute / 10;
+	led_buffer[3] = minute % 10;
 }
