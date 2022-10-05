@@ -10,10 +10,13 @@
 
 #include "main.h"
 
+#define MAX 40
+
 extern int hour;
 extern int minute;
 extern int second;
-extern uint8_t matrix_buffer[8];
+extern uint8_t matrix_buffer[MAX];
+
 
 void clear7SEG();
 void display7SEG(int num);
@@ -27,4 +30,5 @@ void getBuffer(uint8_t buffer);
 void openENM(int index);
 void clearENM();
 void shiftLeft();
+void updateLEDMatrix(int index);
 #endif /* INC_LED_H_ */

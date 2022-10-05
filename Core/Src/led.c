@@ -144,8 +144,13 @@ void blinkLED(){
   /* Init variable */
   const int MAX_LED_MATRIX = 8;
   int index_led_matrix = 0;
-  uint8_t matrix_buffer[8] = {0x00, 0xfc, 0xfe, 0x33, 0x33, 0xfe, 0xfc, 0x00};
-
+  uint8_t matrix_buffer[MAX] = {0x7e, 0x04, 0x08, 0x04, 0x07e, 0x00, 0x00,
+		                        0x3e, 0x40, 0x40, 0x40, 0x03e, 0x00, 0x00,
+								0x4a, 0x4a, 0x7e, 0x00, 0x00,
+                                0x18, 0x18, 0x00, 0x00,
+                                0x7e, 0x4a, 0x7a, 0x00, 0x00,
+								0x7e, 0x04, 0x08, 0x04, 0x07e, 0x00, 0x00,
+                                0x3c, 0x42, 0x42, 0x00, 0x00};
   /* Function get buffer to GPIO */
   void getBuffer(uint8_t config)
   {
@@ -214,28 +219,28 @@ void blinkLED(){
     switch(index)
     {
     case 0:
-      getBuffer(matrix_buffer[0]);
+      getBuffer(matrix_buffer[index]);
       break;
     case 1:
-	  getBuffer(matrix_buffer[1]);
+	  getBuffer(matrix_buffer[index]);
       break;
     case 2:
-        getBuffer(matrix_buffer[2]);
+        getBuffer(matrix_buffer[index]);
       break;
     case 3:
-        getBuffer(matrix_buffer[3]);
+        getBuffer(matrix_buffer[index]);
       break;
     case 4:
-        getBuffer(matrix_buffer[4]);
+        getBuffer(matrix_buffer[index]);
       break;
     case 5:
-        getBuffer(matrix_buffer[5]);
+        getBuffer(matrix_buffer[index]);
       break;
     case 6:
-        getBuffer(matrix_buffer[6]);
+        getBuffer(matrix_buffer[index]);
       break;
     case 7:
-        getBuffer(matrix_buffer[7]);
+        getBuffer(matrix_buffer[index]);
       break;
     default:
       break;
@@ -245,9 +250,9 @@ void blinkLED(){
   void shiftLeft()
   {
 	uint8_t temp = matrix_buffer[0];
-	for(int i = 0; i < 8; i++)
+	for(int i = 0; i < MAX; i++)
 	{
-	  if(i == 7) matrix_buffer[i] = temp;
+	  if(i == MAX - 1) matrix_buffer[i] = temp;
 	  else matrix_buffer[i] = matrix_buffer[i + 1];
 	}
   }

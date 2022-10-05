@@ -94,7 +94,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim2);
   initGPIO();
   int index = 0;
-  int counter = 5;
+  int counter = 3;
   setTimer_EN(counter);
   /* USER CODE END 2 */
 
