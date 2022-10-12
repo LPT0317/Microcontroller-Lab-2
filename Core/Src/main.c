@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "led.h"
 #include "hardware_control.h"
+#include "timer.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -92,29 +93,35 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
   initGPIO();
+  int clock_time = 1000; //set clock to 1s
+  setTimer(clock_time);
+  updateClockBuffer();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    second++;
-    if(second >= 60)
-    {
-      second = 0;
-      minute++;
-    }
-    if(minute >= 60)
-    {
-      minute = 0;
-      hour++;
-    }
-    if(hour >= 24)
-    {
-      hour = 0;
-    }
-    updateClockBuffer();
-    HAL_Delay(1000);
+	if(clock_flag == 1)
+	{
+		second++;
+		if(second >= 60)
+		{
+		  second = 0;
+		  minute++;
+		}
+		if(minute >= 60)
+		{
+		  minute = 0;
+		  hour++;
+		}
+		if(hour >= 24)
+		{
+		  hour = 0;
+		}
+		updateClockBuffer();
+		setTimer(clock_time);
+	}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -247,6 +254,7 @@ static void MX_GPIO_Init(void)
 int counter = 25;
 int led_counter = 100;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+  timerRun();
   if(counter > 0)
   {
     counter--;
